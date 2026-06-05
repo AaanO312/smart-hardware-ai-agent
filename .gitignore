@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+dist/
+
+# Chroma vector store (will be rebuilt on deploy)
+chroma_db/
+
+# Logs
+logs/
+*.log
+
+# Environment / secrets
+.env
+.streamlit/secrets.toml
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# md5 cache
+md5.text
