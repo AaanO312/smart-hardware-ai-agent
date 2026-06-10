@@ -28,7 +28,7 @@ LangChain · Chroma · Streamlit · 通义千问 | [GitHub](https://github.com/A
 - 使用 Streamlit 构建对话界面，支持流式输出，完整闭环可用
 
 ### 旅行规划 Multi-Agent 系统 | 2026.06
-LangGraph · Streamlit · 通义千问 · Open-Meteo API | [github.com/AaanO312/travel_agent](https://github.com/AaanO312/travel_agent)
+LangGraph · Streamlit · 通义千问 · Open-Meteo API | [GitHub](https://github.com/AaanO312/travel_agent) | [在线Demo](https://travelagent-2qjnxbankltdylfl6axvwv.streamlit.app/)
 
 - 4 个协作 Agent：天气查询（接入 Open-Meteo 实时 API）→ 行程规划 + 预算估算（LangGraph 并行 Fan-out）→ 协调合并（冲突检测 + 润色输出）
 - 基于 LangGraph StateGraph 实现 Multi-Agent 编排，行程 Agent 与预算 Agent 并行执行，协调 Agent 自动检测天气冲突（如雨天户外活动自动标记警告）
