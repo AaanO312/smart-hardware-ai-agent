@@ -9,7 +9,7 @@
 
 ## 技术能力
 
-- **AI Agent**：LangChain Agent + Tool Calling、LangGraph（状态图编排 / 条件路由 / 人工介入）、RAG 全链路、Prompt 分层与动态切换、中间件开发
+- **AI Agent**：LangChain Agent + Tool Calling、LangGraph（状态图编排 / Multi-Agent 协作 / 并行 Fan-out / 条件路由）、RAG 全链路、Prompt 分层与动态切换、中间件开发
 - **LLM & 模型**：通义千问（DashScope）、deepseek-v4 pro；熟悉 API 调用、参数调优与流式输出
 - **向量库 & 检索**：Chroma、DashScope Embedding、PDF/TXT 文档解析（PyPDF）、文本切分与 Top-K 语义检索
 - **工程 & 工具**：Python、Streamlit、FastAPI、Git；具备异常处理与全链路排查能力
@@ -27,10 +27,10 @@ LangChain · Chroma · Streamlit · 通义千问 | [GitHub](https://github.com/A
 - 开发 Agent 中间件管道：工具调用全程监控、基于上下文的动态 Prompt 切换——Agent 在工具调用过程中自动识别报告生成意图并切换系统提示词，无需用户手动切换模式
 - 使用 Streamlit 构建对话界面，支持流式输出，完整闭环可用
 
-### 简历分析 Agent（LangGraph + Claude code） | 2026.06
-LangGraph · Streamlit · 通义千问 · PyPDF | [github.com/AaanO312/resume_agent](https://github.com/AaanO312/resume_agent)
+### 旅行规划 Multi-Agent 系统 | 2026.06
+LangGraph · Streamlit · 通义千问 · Open-Meteo API | [github.com/AaanO312/travel_agent](https://github.com/AaanO312/travel_agent)
 
-- 全程 AI 辅助开发（claude code），我主导状态图架构设计与节点逻辑校验，AI 生成代码，快速交付可运行产品
-- 基于 LangGraph 构建 6 节点 Agent 工作流：简历解析 → JD 匹配打分 → LLM 自主路由决策 →（深度分析 / 人工补充）→ 优化建议 + 改后简历生成
-- 核心亮点：路由不由代码硬编码，由 LLM 自主判断匹配度后选择最优路径（直接生成 / 深入拆解 JD / 请求用户补充），体现 Agent 自主决策能力
-- 使用 StateGraph + 条件路由 + interrupt + MemorySaver 实现有状态多步骤推理与人工介入
+- 4 个协作 Agent：天气查询（接入 Open-Meteo 实时 API）→ 行程规划 + 预算估算（LangGraph 并行 Fan-out）→ 协调合并（冲突检测 + 润色输出）
+- 基于 LangGraph StateGraph 实现 Multi-Agent 编排，行程 Agent 与预算 Agent 并行执行，协调 Agent 自动检测天气冲突（如雨天户外活动自动标记警告）
+- 全程 AI 辅助开发，我主导 Multi-Agent 架构设计、并行策略与冲突检测逻辑，AI 生成代码，快速交付可运行产品
+- 完整闭环：输入目的地/日期/预算/偏好 → 输出含天气、每日行程、分项预算的完整旅行计划
