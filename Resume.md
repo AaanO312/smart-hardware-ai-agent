@@ -33,4 +33,4 @@ LangGraph · Streamlit · 通义千问 · Open-Meteo API | [github.com/AaanO312/
 - 4 个协作 Agent：天气查询（接入 Open-Meteo 实时 API）→ 行程规划 + 预算估算（LangGraph 并行 Fan-out）→ 协调合并（冲突检测 + 润色输出）
 - 基于 LangGraph StateGraph 实现 Multi-Agent 编排，行程 Agent 与预算 Agent 并行执行，协调 Agent 自动检测天气冲突（如雨天户外活动自动标记警告）
 - 全程 AI 辅助开发，我主导 Multi-Agent 架构设计、并行策略与冲突检测逻辑，AI 生成代码，快速交付可运行产品
-- 完整闭环：输入目的地/日期/预算/偏好 → 输出含天气、每日行程、分项预算的完整旅行计划
+- 混合交互设计：表单收集结构化需求 → Agent 生成方案 → 对话式迭代微调（如"第一天太赶""换个酒店"），直到用户满意
