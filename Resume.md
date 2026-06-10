@@ -30,7 +30,7 @@ LangChain · Chroma · Streamlit · 通义千问 | [GitHub](https://github.com/A
 ### 旅行规划 Multi-Agent 系统 | 2026.06
 LangGraph · Streamlit · 通义千问 · Open-Meteo API | [GitHub](https://github.com/AaanO312/travel_agent) | [在线Demo](https://travelagent-2qjnxbankltdylfl6axvwv.streamlit.app/)
 
-- 4 个协作 Agent：天气查询（接入 Open-Meteo 实时 API）→ 行程规划 + 预算估算（LangGraph 并行 Fan-out）→ 协调合并（冲突检测 + 润色输出）
-- 基于 LangGraph StateGraph 实现 Multi-Agent 编排，行程 Agent 与预算 Agent 并行执行，协调 Agent 自动检测天气冲突（如雨天户外活动自动标记警告）
-- 全程 AI 辅助开发，我主导 Multi-Agent 架构设计、并行策略与冲突检测逻辑，AI 生成代码，快速交付可运行产品
-- 混合交互设计：表单收集结构化需求 → Agent 生成方案 → 对话式迭代微调（如"第一天太赶""换个酒店"），直到用户满意
+- 4 个协作 Agent：天气查询（接入 Open-Meteo 实时 API）→ 行程规划 + 预算估算（LangGraph 并行 Fan-out）→ 协调 Agent 智能审核（6 项标准逐条检查：天气冲突/预算超支/行程密度/时间逻辑/偏好匹配/完整度）
+- 协调 Agent 自主决策：审核不通过时自动驳回、生成具体修订指令、行程/预算 Agent 根据指令重做、再次提交审核，最多 3 轮循环直到方案自洽（实测平均 2 轮通过）
+- 混合交互设计：表单收集需求 → Agent 生成方案 → 对话式微调（如"第一天太赶""换个酒店"），用户反馈直接注入修订循环
+- 全程 AI 辅助开发，我主导 Multi-Agent 架构设计、审核标准制定与修订循环逻辑，AI 生成代码
