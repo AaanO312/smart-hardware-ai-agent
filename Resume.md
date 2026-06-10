@@ -19,7 +19,7 @@
 ## 项目经历
 
 ### 智能硬件售后 AI Agent 问答系统 | 2026.04 - 2026.05
-LangChain · Chroma · Streamlit · 通义千问 | [github.com/AaanO312/smart-hardware-ai-agent](https://github.com/AaanO312/smart-hardware-ai-agent)
+LangChain · Chroma · Streamlit · 通义千问 | [GitHub](https://github.com/AaanO312/smart-hardware-ai-agent) | [在线Demo](https://jlasm5aioqgvmrh3dvqhwn.streamlit.app/)
 
 - 独立完成从架构设计到上线的全流程，面向扫地机器人售后场景，覆盖故障排查、维护保养、使用建议等 10+ 类问题
 - 基于 RAG 架构搭建 Chroma 本地向量库，完成 PDF/TXT 文档解析、文本切分、DashScope Embedding 向量化、Top-K 相似度检索全链路，导入 3 个扫地机器人专业知识库文件
