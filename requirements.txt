@@ -1,6 +1,8 @@
 dashscope>=1.25.17
+fastapi>=0.115.0
 langchain>=1.2.18
 langchain-chroma>=0.2.0
 langchain-community>=0.4.1
 pypdf>=6.11.0
 streamlit>=1.57.0
+uvicorn>=0.34.0

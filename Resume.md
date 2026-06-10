@@ -12,7 +12,7 @@
 - **AI Agent**：LangChain Agent + Tool Calling、LangGraph（状态图编排 / 条件路由 / 人工介入）、RAG 全链路、Prompt 分层与动态切换、中间件开发
 - **LLM & 模型**：通义千问（DashScope）、deepseek-v4 pro；熟悉 API 调用、参数调优与流式输出
 - **向量库 & 检索**：Chroma、DashScope Embedding、PDF/TXT 文档解析（PyPDF）、文本切分与 Top-K 语义检索
-- **工程 & 工具**：Python、Streamlit、Git；具备异常处理与全链路排查能力
+- **工程 & 工具**：Python、Streamlit、FastAPI、Git；具备异常处理与全链路排查能力
 
 ---
 
