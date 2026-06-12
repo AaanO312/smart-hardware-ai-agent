@@ -1,0 +1,32 @@
+# 一键启动：docker compose up -d
+# 智能硬件售后 AI Agent — FastAPI 后端 + Streamlit 前端
+
+services:
+  api:
+    build: .
+    container_name: hardware-api
+    command: uvicorn api:app --host 0.0.0.0 --port 8000 --reload
+    ports:
+      - "8000:8000"
+    environment:
+      - DASHSCOPE_API_KEY=${DASHSCOPE_API_KEY}
+    volumes:
+      - .:/app
+      - chroma_data:/app/chroma_db   # Chroma 向量库持久化
+
+  streamlit:
+    build: .
+    container_name: hardware-streamlit
+    command: streamlit run app.py --server.port 8501 --server.address 0.0.0.0
+    ports:
+      - "8501:8501"
+    environment:
+      - DASHSCOPE_API_KEY=${DASHSCOPE_API_KEY}
+    volumes:
+      - .:/app
+      - chroma_data:/app/chroma_db
+    depends_on:
+      - api
+
+volumes:
+  chroma_data:   # 持久化向量库，容器删了数据还在
