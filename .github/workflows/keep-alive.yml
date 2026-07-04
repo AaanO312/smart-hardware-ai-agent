@@ -1,0 +1,25 @@
+name: Streamlit Keep-Alive
+
+# 每 10 分钟 ping 一次，防止 Streamlit Cloud 免费版休眠
+# Streamlit Cloud 免费版在无人访问后会进入睡眠，recruiter 点开链接时不用等冷启动
+on:
+  schedule:
+    - cron: "*/10 * * * *"   # 每 10 分钟
+  workflow_dispatch:          # 允许手动触发
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping 智能硬件售后 AI Agent
+        run: |
+          curl -s -o /dev/null -w "智能客服: HTTP %{http_code}\n" \
+            https://smart-hardware-ai-agent-115116.streamlit.app/
+
+      - name: Ping 旅行规划 Multi-Agent
+        run: |
+          curl -s -o /dev/null -w "旅行规划: HTTP %{http_code}\n" \
+            https://travelagent-0312.streamlit.app/
+
+      - name: Ping 结果汇总
+        run: echo "Keep-alive ping 完成 — $(date -u)"
