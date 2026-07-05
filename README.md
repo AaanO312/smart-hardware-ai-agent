@@ -1,8 +1,33 @@
 # 面向智能硬件售后的 RAG Agent 问答与使用分析系统
 
+![Python](https://img.shields.io/badge/Python-3.12-blue) ![LangChain](https://img.shields.io/badge/LangChain-Agent--Tool--Calling-green) ![Chroma](https://img.shields.io/badge/Chroma-Vector--DB-orange) ![FastAPI](https://img.shields.io/badge/FastAPI-REST--API-teal) ![Docker](https://img.shields.io/badge/Docker-Container-blue) ![Streamlit](https://img.shields.io/badge/Streamlit-Frontend-red)
+
 扫地机器人售后 AI Agent — 基于 RAG 知识库 + ReAct Agent 的智能问答系统。
 
 支持故障排查、维护建议、使用报告生成。Agent 自主调用 7 个工具，根据用户意图动态切换 Prompt。
+
+## 架构
+
+```mermaid
+flowchart LR
+    A[👤 用户提问] --> B[🧠 Agent<br/>ReAct 推理循环]
+    B --> C[🔧 中间件层<br/>工具调用监控 + Prompt 动态切换]
+    C --> D[🛠️ 工具调用]
+    D --> D1[📚 知识库检索<br/>Chroma Top-K]
+    D --> D2[🌤️ 天气查询]
+    D --> D3[📍 用户定位]
+    D --> D4[📋 使用记录查询]
+    D --> E[🤖 LLM<br/>通义千问]
+    E --> F[📡 流式返回<br/>SSE 打字机输出]
+    F --> A
+```
+
+- **用户提问**：自然语言输入，支持故障排查、维护建议、报告生成等场景
+- **Agent (ReAct)**：LangChain ReAct Agent，自主推理 + 决策工具调用顺序
+- **中间件层**：监控每次工具调用；识别用户意图后动态切换系统 Prompt（普通问答 ↔ 报告生成）
+- **工具调用**：7 个工具覆盖知识检索、天气、定位、外部数据查询等
+- **LLM**：通义千问模型，结合检索上下文和 Prompt 生成回答
+- **流式返回**：SSE 真流式输出，打字机效果逐字返回
 
 ## 功能特性
 
@@ -11,6 +36,7 @@
 - 基于 LangChain Agent 实现 Tool Calling，支持知识库检索、天气查询、用户位置获取和使用记录查询。
 - 支持动态 Prompt 切换，区分普通问答和月度使用报告生成场景。
 - 接入日志模块，记录模型调用、工具调用和异常信息，便于调试。
+- 基于 FastAPI StreamingResponse 实现 SSE 真流式输出，结合 `asyncio.to_thread` 解决同步生成器阻塞事件循环问题，实现打字机式逐字返回。
 
 ## 技术栈
 
@@ -18,6 +44,9 @@
 - Streamlit
 - LangChain
 - Chroma
+- FastAPI
+- Docker
+- PyPDF
 - DashScope / 通义千问
 - uv
 
@@ -33,6 +62,7 @@
 ├── rag/                # 向量库加载、检索与 RAG 回答生成
 ├── utils/              # 配置、日志、文件和路径工具
 ├── app.py              # Streamlit 应用入口
+├── api.py              # FastAPI SSE 流式接口
 ├── pyproject.toml
 └── uv.lock
 ```
@@ -63,9 +93,21 @@ $env:DASHSCOPE_API_KEY="your_api_key_here"
 
 ## 运行项目
 
+**本地开发：**
+
 ```powershell
 streamlit run app.py
 ```
+
+**Docker 一键启动：**
+
+```bash
+docker-compose up --build
+```
+
+启动后访问：
+- 前端界面：http://localhost:8501
+- API 文档：http://localhost:8000/docs
 
 ## 示例问题
 
@@ -92,6 +134,11 @@ streamlit run app.py
 ## 知识库说明
 
 项目会从 `data/` 目录读取知识库文件，并写入本地 Chroma 向量库。
+
+当前知识库规模：
+- **3 个**知识库文档（基础知识库 / 故障排查 / 维护保养与使用建议）
+- 约 **200+ 条**文本切分片段
+- Top-K=**3** 语义检索
 
 推荐知识库文件：
 
@@ -123,3 +170,11 @@ md5.text
 - 本地向量知识库构建与检索
 - 外部用户数据查询与报告生成
 - Prompt 分层设计与动态切换
+
+## 效果展示
+
+![流式对话](docs/streaming_chat.png)
+
+![使用报告生成](docs/report.png)
+
+> 截图待补充
