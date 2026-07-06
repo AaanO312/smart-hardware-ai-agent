@@ -1,19 +1,14 @@
-# ---- 基础镜像 ----
+# ---- HF Spaces Docker 镜像 ----
 FROM python:3.12-slim
 
-# 设置工作目录
 WORKDIR /app
 
-# ---- 安装依赖 ----
-# 先复制 requirements.txt（单独一层，改代码不用重装依赖）
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple/
+RUN pip install --no-cache-dir -r requirements.txt
 
-# ---- 复制项目代码 ----
 COPY . .
 
-# ---- 暴露端口 ----
-EXPOSE 8000 8501
+# HF Spaces 固定用 7860
+EXPOSE 7860
 
-# ---- 启动命令（由 docker-compose 覆盖） ----
-CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["streamlit", "run", "app.py", "--server.port", "7860", "--server.address", "0.0.0.0"]

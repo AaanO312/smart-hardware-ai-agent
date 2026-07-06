@@ -3,12 +3,15 @@ import time
 import os
 from agent.react_agent import ReactAgent
 
-# 本地用环境变量，线上用 Streamlit Secrets
+# API Key（兼容 Streamlit Cloud Secrets / HF Spaces Secrets / 本地 .env）
 try:
     if "DASHSCOPE_API_KEY" in st.secrets:
         os.environ["DASHSCOPE_API_KEY"] = st.secrets["DASHSCOPE_API_KEY"]
 except Exception:
     pass
+# HF Spaces 用环境变量传入
+if not os.getenv("DASHSCOPE_API_KEY"):
+    os.environ["DASHSCOPE_API_KEY"] = os.getenv("DASHSCOPE_API_KEY", "")
 
 st.title("智扫通智能机器人")        #标题
 st.divider()

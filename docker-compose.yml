@@ -3,7 +3,9 @@
 
 services:
   api:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.compose
     container_name: hardware-api
     command: uvicorn api:app --host 0.0.0.0 --port 8000 --reload
     ports:
@@ -15,7 +17,9 @@ services:
       - chroma_data:/app/chroma_db   # Chroma 向量库持久化
 
   streamlit:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.compose
     container_name: hardware-streamlit
     command: streamlit run app.py --server.port 8501 --server.address 0.0.0.0
     ports:
