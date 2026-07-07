@@ -1,5 +1,7 @@
 # 面向智能硬件售后的 RAG Agent 问答与使用分析系统
 
+> 🚀 在线体验 Demo：https://modelscope.cn/studios/AaanO312/smart-hardware-agent
+
 ![Python](https://img.shields.io/badge/Python-3.12-blue) ![LangChain](https://img.shields.io/badge/LangChain-Agent--Tool--Calling-green) ![Chroma](https://img.shields.io/badge/Chroma-Vector--DB-orange) ![FastAPI](https://img.shields.io/badge/FastAPI-REST--API-teal) ![Docker](https://img.shields.io/badge/Docker-Container-blue) ![Streamlit](https://img.shields.io/badge/Streamlit-Frontend-red)
 
 扫地机器人售后 AI Agent — 基于 RAG 知识库 + ReAct Agent 的智能问答系统。
