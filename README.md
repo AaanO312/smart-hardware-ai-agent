@@ -1,6 +1,6 @@
 # 面向智能硬件售后的 RAG Agent 问答与使用分析系统
 
-> 🚀 在线体验 Demo：https://modelscope.cn/studios/AaanO312/smart-hardware-agent
+> 在线体验 Demo：https://modelscope.cn/studios/AaanO312/smart-hardware-agent
 
 ![Python](https://img.shields.io/badge/Python-3.12-blue) ![LangChain](https://img.shields.io/badge/LangChain-Agent--Tool--Calling-green) ![Chroma](https://img.shields.io/badge/Chroma-Vector--DB-orange) ![FastAPI](https://img.shields.io/badge/FastAPI-REST--API-teal) ![Docker](https://img.shields.io/badge/Docker-Container-blue) ![Streamlit](https://img.shields.io/badge/Streamlit-Frontend-red)
 
@@ -12,15 +12,15 @@
 
 ```mermaid
 flowchart LR
-    A[👤 用户提问] --> B[🧠 Agent<br/>ReAct 推理循环]
-    B --> C[🔧 中间件层<br/>工具调用监控 + Prompt 动态切换]
-    C --> D[🛠️ 工具调用]
-    D --> D1[📚 知识库检索<br/>Chroma Top-K]
-    D --> D2[🌤️ 天气查询]
-    D --> D3[📍 用户定位]
-    D --> D4[📋 使用记录查询]
-    D --> E[🤖 LLM<br/>通义千问]
-    E --> F[📡 流式返回<br/>SSE 打字机输出]
+    A[用户提问] --> B[Agent<br/>ReAct 推理循环]
+    B --> C[中间件层<br/>工具调用监控 + Prompt 动态切换]
+    C --> D[工具调用]
+    D --> D1[知识库检索<br/>Chroma Top-K]
+    D --> D2[天气查询]
+    D --> D3[用户定位]
+    D --> D4[使用记录查询]
+    D --> E[LLM<br/>通义千问]
+    E --> F[流式返回<br/>SSE 打字机输出]
     F --> A
 ```
 
@@ -172,11 +172,3 @@ md5.text
 - 本地向量知识库构建与检索
 - 外部用户数据查询与报告生成
 - Prompt 分层设计与动态切换
-
-## 效果展示
-
-![流式对话](docs/streaming_chat.png)
-
-![使用报告生成](docs/report.png)
-
-> 截图待补充
