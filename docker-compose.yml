@@ -15,6 +15,11 @@ services:
     volumes:
       - .:/app
       - chroma_data:/app/chroma_db   # Chroma 向量库持久化
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   streamlit:
     build:
@@ -31,6 +36,11 @@ services:
       - chroma_data:/app/chroma_db
     depends_on:
       - api
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
 volumes:
   chroma_data:   # 持久化向量库，容器删了数据还在
